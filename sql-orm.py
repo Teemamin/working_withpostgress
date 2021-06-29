@@ -30,6 +30,7 @@ class Album(base):
 
 
 # create a class based model for Track table
+
 class Track(base):
     __tablename__ = "Track"
     TrackId = Column(Integer, primary_key=True)
@@ -51,3 +52,37 @@ session = Session()
 
 # creating the database using declarative_base sub class
 base.metadata.create_all(db)
+
+# query 1 select all records from the Artist table
+# artists = session.query(Artist)
+# for artist in artists:
+#     print(artist.ArtistId, artist.Name, sep=' | ')
+
+
+# query 2 select only the Name column from Artist table
+# artists = session.query(Artist)
+# for artist in artists:
+#     print(artist.Name)
+
+# query 3 select only Queen from Artist table
+# artist = session.query(Artist).filter_by(Name="Queen").first()
+# print(artist.ArtistId, artist.Name, sep=' | ')
+
+# query 4 select only by ArtistId 51 from Artist table
+# artist = session.query(Artist).filter_by(ArtistId=51).first()
+# print(artist.ArtistId, artist.Name, sep=' | ')
+
+# query 5 select only the albums with ArtistId 51 from Album table
+# albums = session.query(Album).filter_by(ArtistId=51)
+# for album in albums:
+#     print(album.AlbumId, album.Title, sep=' | ')
+
+# query 6  select all  from the Track table where Composer is Queen
+tracks = session.query(Track).filter_by(Composer="Queen")
+for track in tracks:
+    print(track.TrackId, track.Name, track.AlbumId,
+     track.Composer, track.UnitPrice, sep=' | ')
+
+
+
+
